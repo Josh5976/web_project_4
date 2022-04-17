@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="content" content="HTML, CSS, JavaScript">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Around the US</title>
+</head>
+<body>
+    <div class="page">
+        
+        <section class="edit">
+            <div class="edit__content">
+                <h2 class="edit__content-title">Edit profile</h2>
+                <form class="form">
+                    <input class="form__input form__input_name" type="text" id="name" name="name" value="" placeholder="">
+                    <input class="form__input form__input_job" type="text" id="occupation" name="occupation" value="" placeholder="">
+                    <input class="form__button" type="submit" value="Save">
+                </form>
+            </div>
+            <button class="edit__close"></button>
+        </section>
+        <div class="page__none">
+        <header class="header">
+            <img src="./images/header_vector.svg" class="header__image" alt="Around the US">
+        </header>
+        <main class="page__content">
+            <section class="profile">
+                <img src="./images/profile_image.jpg" class="profile__image" alt="profile image">
+                <div class="profile__info">
+                    <h2 class="profile__info-title">Jacques Cousteau</h2>
+                    <button class="profile__info-button"></button>
+                    <p class="profile__info-subtitle"> Explorer</p>
+                </div>
+                <button class="profile__button"></button>
+            </section>
+            <section class="elements" id="elements">
+                <artice class="card">
+                    <img src="./images/yosemite_image.jpg" class="card__image" alt="some image">
+                    <div class="card__info">
+                        <h3 class="card__info-title">Yosemite Valley</h3>
+                        <button class="card__info-button"></button>
+                    </div>
+                </artice>
+                <artice class="card">
+                    <img src="./images/louise_image.jpg" class="card__image" alt="some image">
+                    <div class="card__info">
+                        <h3 class="card__info-title">Lake Louise</h3>
+                        <button class="card__info-button"></button>
+                    </div>
+                </artice>
+                <artice class="card">
+                    <img src="./images/bald-mountain_image.jpg" class="card__image" alt="some image">
+                    <div class="card__info">
+                        <h3 class="card__info-title">Bald Mountains</h3>
+                        <button class="card__info-button"></button>
+                    </div>
+                </artice>
+                <artice class="card">
+                    <img src="./images/latenar_image.jpg" class="card__image" alt="some image">
+                    <div class="card__info">
+                        <h3 class="card__info-title">Latemar</h3>
+                        <button class="card__info-button"></button>
+                    </div>
+                </artice>
+                <artice class="card">
+                    <img src="./images/vanoise_image.jpg" class="card__image" alt="some image">
+                    <div class="card__info">
+                        <h3 class="card__info-title">Vanoise National Park</h3>
+                        <button class="card__info-button"></button>
+                    </div>
+                </artice>
+                <artice class="card">
+                    <img src="./images/lago_image.jpg" class="card__image" alt="some image">
+                    <div class="card__info">
+                        <h3 class="card__info-title">Lago di Braies</h3>
+                        <button class="card__info-button"></button>
+                    </div>
+                </artice>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__text">© 2021 Around The U.S.</p>
+        </footer>
+        </div>
+    </div>
+    <script src="./scripts/edit_profile.js"></script>
+</body>
+
+</html>

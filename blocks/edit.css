@@ -1,0 +1,64 @@
+.edit {
+    width: 430px;
+    height: 330px;
+    background-color: #FFF;
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -64%);
+    border-radius: 10px;
+    opacity: 1;
+    display: none;
+    z-index: 100;
+}
+
+.edit__content {
+    max-width: 358px;
+    margin: 34px auto 36.51px; 
+}
+
+.edit__content-title {
+    margin: 0;
+    color: #000;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.2;
+    padding-bottom: 54px;
+    max-height: 23px;
+}
+
+.edit__close {
+    background-image: url("../images/close_icon.svg");
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: -40px;
+    right: -40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 565px) {
+    .edit {
+        max-width: 282px;
+        max-height: 322px;
+    }
+    .edit__content {
+        max-width: 238px;
+        margin: 25px auto;
+    }
+    .edit__title {
+        font-size: 18px;
+        padding-bottom: 76px;
+    }
+    .edit__close {
+        width: 26px;
+        height: 26px;
+        right: 0px;
+    }
+}
