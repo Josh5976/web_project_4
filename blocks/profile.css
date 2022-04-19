@@ -2,7 +2,7 @@
     max-width: 100%;
     display: flex;
     align-items: center;
-    padding-bottom: 59px;
+    margin-bottom: 59px;
 }
 
 .profile__image {
@@ -28,7 +28,6 @@
     font-size: 42px;
     line-height: 1.14;
     padding-right: 18px;
-    max-height: 39px;
 }
 
 .profile__info-subtitle {
@@ -43,7 +42,7 @@
 }
 
 .profile__info-button {
-    background-color: #000;
+    background-color: transparent;
     background-image: url("../images/edit_profile.svg");
     background-repeat: no-repeat;
     background-position: center;
@@ -60,7 +59,7 @@
 
 .profile__button {
     padding: 0;
-    background-color: #000;
+    background-color: transparent;
     border: 2px #FFF solid;
     width: 150px;
     height: 50px;
@@ -70,6 +69,7 @@
     background-size: 22px 22px;
     cursor: pointer;
     transition: opacity .4s ease;
+    border-radius: 2px;
 }
 
 .profile__button:hover {
@@ -104,32 +104,27 @@
 
 @media screen and (max-width: 565px) {
     .profile {
-        grid-template-rows: repeat(3, 1fr);
-        grid-template-areas: 
-        "image"
-        "info"
-        "button";
-        padding-bottom: 36px;
-        max-height: 286px;
+        display: flex;
+        flex-direction: column;
         max-width: 282px;
-        margin: 0 auto;
+        margin: 0 auto 36px;
     }
 
     .profile__image {
-        margin: 0 auto;
+        margin: 0 0 26.25px 0;
     }
 
     .profile__info {
         padding: 0;
-        margin: 0 auto;
+        margin: 0 auto 36px;
         justify-content: center;
+        align-items: flex-start;;
     }
 
     .profile__info-title {
         font-size: 22px;
         line-height: 1.22;
         padding-right: 10px;
-        max-height: 23px;
     }
 
     .profile__info-subtitle{

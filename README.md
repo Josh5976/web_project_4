@@ -4,6 +4,13 @@
 
 * Figma
 * Images
+* Javascript
+* CSS
+    - flexbox
+    - grid
+* Html
+
+Github page: https://josh5976.github.io/web_project_4/
 
 **Figma**
 

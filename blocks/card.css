@@ -3,7 +3,6 @@
     border-radius: 10px;
     background-color: #FFF;
     color: #000;
-    min-height: 361px;
     margin-left: auto;
 }
 
@@ -54,7 +53,7 @@
     background-image: url("../images/like_icon.svg");
     background-position: center;
     background-repeat: no-repeat;
-    background-color: #FFF;
+    background-color: transparent;
 }
 
 .card__info-button:hover {
