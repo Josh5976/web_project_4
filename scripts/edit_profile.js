@@ -6,11 +6,15 @@ let nameInput = formElement.querySelector(".form__info-input_type_name");
 let jobInput = formElement.querySelector(".form__info-input_type_job");
 let name = document.querySelector(".profile__info-title");
 let job = document.querySelector(".profile__info-subtitle");
+let editPage = document.querySelector(".edit")
 
 function toggleForm() {
-    nameInput.placeholder = name.textContent;
-    jobInput.placeholder = job.textContent;
-    document.querySelector(".edit").classList.toggle("edit_display_none");
+    editPage.classList.toggle("edit_disabled");
+    if (editPage.classList.contains("edit_disabled")) {
+    } else {
+        nameInput.value = name.textContent;
+        jobInput.value = job.textContent;
+    }
 }
 
 function handleProfileFormSubmit(evt) {

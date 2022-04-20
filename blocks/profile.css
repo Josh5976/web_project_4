@@ -14,7 +14,7 @@
 .profile__info {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
+    align-items: center;
     max-width: 415px;
     padding-left: 30px;
     margin-right: auto;
@@ -28,6 +28,10 @@
     font-size: 42px;
     line-height: 1.14;
     padding-right: 18px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 373px;
 }
 
 .profile__info-subtitle {
@@ -39,6 +43,10 @@
     margin: 0;
     padding-top: 16px;
     width: 415px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 415px;
 }
 
 .profile__info-button {
@@ -118,13 +126,14 @@
         padding: 0;
         margin: 0 auto 36px;
         justify-content: center;
-        align-items: flex-start;;
+        align-items: center;
     }
 
     .profile__info-title {
         font-size: 22px;
         line-height: 1.22;
         padding-right: 10px;
+        max-width: 196px;
     }
 
     .profile__info-subtitle{
@@ -133,7 +142,7 @@
         padding-top: 14px;
         width: 100%;
         text-align: center;
-        width: 282px;
+        max-width: 282px;
     }
 
     .profile__info-button {

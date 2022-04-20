@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-.edit_display_none {
+.edit_disabled {
     display: none;
 }
 
@@ -43,6 +43,11 @@
 @media screen and (max-width: 565px) {
     .edit__content {
         max-width: 282px;
+    }
+    .edit__content-close {
+        width: 26px;
+        height: 26px;
+        right: 0;
     }
     
 }

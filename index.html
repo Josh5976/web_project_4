@@ -10,14 +10,14 @@
 </head>
 <body>
     <div class="page">
-        <div class="edit edit_display_none">
+        <div class="edit edit_disabled">
             <div class="edit__content">
                 <button class="edit__content-close" type="button"></button>
                 <form class="form" name="edit_from">
                     <fieldset class="form__info">
                         <legend class="form__info-title">Edit Profile</legend>
-                        <input class="form__info-input form__info-input_type_name" required="required" type="text" id="name" name="name" value="" placeholder="">
-                        <input class="form__info-input form__info-input_type_job" required="required" type="text" id="occupation" name="occupation" value="" placeholder="">
+                        <input class="form__info-input form__info-input_type_name" required="required" type="text" id="name" name="name" value="" placeholder="Name">
+                        <input class="form__info-input form__info-input_type_job" required="required" type="text" id="occupation" name="occupation" value="" placeholder="Occupation">
                         <input class="form__info-button" type="submit" value="Save">
                     </fieldset>
                 </form>
@@ -31,7 +31,7 @@
                 <img src="./images/profile_image.jpg" class="profile__image" alt="profile image">
                 <div class="profile__info">
                     <h1 class="profile__info-title">Jacques Cousteau</h1>
-                    <button class="profile__info-button"></button>
+                    <button class="profile__info-button" type="button"></button>
                     <p class="profile__info-subtitle">Explorer</p>
                 </div>
                 <button class="profile__button" type="button"></button>
