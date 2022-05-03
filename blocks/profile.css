@@ -90,8 +90,7 @@
         grid-template-rows: repeat(2, 1fr);
         grid-template-areas: 
         "image info"
-        "button button"
-        ;
+        "button button";
     }
 
     .profile__image {
