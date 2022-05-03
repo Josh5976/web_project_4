@@ -1,13 +1,38 @@
 .card {
+    width: 282px;
     max-width: 282px;
+    flex-grow: 1;
     border-radius: 10px;
     background-color: #FFF;
     color: #000;
     margin-left: auto;
+    z-index: 0;
+    position: relative;
 }
 
 .card:nth-of-type(2n){
     margin-left: 0;
+}
+
+.card__trash {
+    background-image: url("../images/trash_button.svg");
+    background-size: cover;
+    width: 18px;
+    height: 19.3px;
+    right: 0px;
+    z-index: 100;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    top: 18px;
+    right: 15px;
+    cursor: pointer;
+    transition: opacity .3s ease;
+    position: absolute;
+}
+
+.card__trash:hover{
+    opacity: .6;
 }
 
 @media screen and (max-width: 580px) {
@@ -20,6 +45,7 @@
     width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    height: 282px;
 }
 
 .card__info {
@@ -49,7 +75,7 @@
     width: 21px;
     height: 19px;
     cursor: pointer;
-    transition: opacity .4s;
+    transition: opacity .3s;
     background-image: url("../images/like_icon.svg");
     background-position: center;
     background-repeat: no-repeat;
@@ -60,7 +86,7 @@
     opacity: .5;
 }
 
-.card__info-button:active {
+.card__info-button_active {
     background-image: url("../images/active_like.svg");
     opacity: 1;
 }
