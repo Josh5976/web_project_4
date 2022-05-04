@@ -81,6 +81,7 @@ function createCard(title, link) {
   cardImage.alt = `A picture of ${title}`;
   cardImage.addEventListener("click", function(){
     previewPopupImage.src = link;
+    previewPopupImage.alt = `The full picture of ${title}`;
     previewPopupTitle.textContent = title;
     openPopup(preview);
   });
@@ -118,19 +119,20 @@ initialCards.forEach((card) => {
 });
 
 //profile functions
+function fillProfilePopup(){
+  profileNameInput.value = profileName.textContent;
+  profileJobInput.value = profileJob.textContent;
+}
+
 function handleProfileFormSubmit(evt) {
-    evt.preventDefault();
-    profileName.textContent = profileNameInput.value;
-    profileJob.textContent = profileJobInput.value;
-    closePopup(profilePopup);
-    if (popup.classList.contains("popup_disabled")) {
-    } else {
-      profileNameInput.value = profileName.textContent;
-      profileJobInput.value = profileJob.textContent;
-    }
+  evt.preventDefault();
+  profileName.textContent = profileNameInput.value;
+  profileJob.textContent = profileJobInput.value;
+  closePopup(profilePopup);
 }
 
 profileButton.addEventListener('click', function(){
+  fillProfilePopup();
   openPopup(profilePopup);
 });
 profileCloseButton.addEventListener('click', function(){
