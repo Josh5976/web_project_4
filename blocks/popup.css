@@ -11,12 +11,13 @@
     flex-direction: column;
     visibility: visible;
     opacity: 1;
-    transition: visibility 0s, opacity .35s ease;
+    transition: visibility 0s, opacity .5s linear;
 }
 
 .popup_disabled {
     visibility: hidden;
     opacity: 0;
+    transition: visibility 0s .5s, opacity .5s linear;
 }
 
 .popup__content {

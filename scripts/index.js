@@ -1,24 +1,27 @@
 //form elements
-const formElement = document.querySelector(".form");
-const formButton = formElement.querySelector(".form__info-button");
-const nameInput = formElement.querySelector(".form__info-input_type_name");
-const jobInput = formElement.querySelector(".form__info-input_type_job");
+const profileFormElement = document.querySelector(".form");
+const formButton = profileFormElement.querySelector(".form__info-button");
+const profileNameInput = profileFormElement.querySelector(".form__info-input_type_name");
+const profileJobInput = profileFormElement.querySelector(".form__info-input_type_job");
+
 //profile elements
 const profileButton = document.querySelector(".profile__info-button");
-const name = document.querySelector(".profile__info-title");
-const job = document.querySelector(".profile__info-subtitle");
+const profileName = document.querySelector(".profile__info-title");
+const profileJob = document.querySelector(".profile__info-subtitle");
+
 //popup elements
 const profileCloseButton = document.querySelector(".popup__content-close");
-const popup = document.querySelector(".popup");
+const profilePopup = document.querySelector(".popup");
 const postPopup = document.querySelector("#popup_post");
+
 //post elements
 const postButton = document.querySelector(".profile__button");
 const postCloseButton = document.querySelector("#post_close");
 const elements = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#card-template").content;
 const formElementPost = document.querySelector("#form_post");
-const titleElement = document.querySelector(".form__info-input_type_title");
-const linkElement = document.querySelector(".form__info-input_type_image");
+const postTitleElement = document.querySelector(".form__info-input_type_title");
+const postLinkElement = document.querySelector(".form__info-input_type_image");
 const initialCards = [
     {
       name: "Yosemite Valley",
@@ -45,32 +48,41 @@ const initialCards = [
       link: "https://code.s3.yandex.net/web-code/lago.jpg"
     }
   ];
+
 //preview post elements
 const preview = document.querySelector(".popup_type_preview");
-const popupTitle = preview.querySelector(".popup__title");
-const popupImage = preview.querySelector(".popup__image");
+const previewPopupTitle = preview.querySelector(".popup__title");
+const previewPopupImage = preview.querySelector(".popup__image");
 const closePreviewButton = preview.querySelector(".popup__content-close")
 
+//popup functions
+function openPopup(elem) {
+  elem.classList.remove("popup_disabled");
+}
+
+function closePopup(elem) {
+  elem.classList.add("popup_disabled");
+}
+
 //preview functions
-closePreviewButton.addEventListener("click", function() {
-  preview.classList.toggle("popup_disabled");
+closePreviewButton.addEventListener("click", function(){
+  closePopup(preview);
 });
 
 // post edit functions
-function togglePostForm() {
-  postPopup.classList.toggle("popup_disabled");
-}
-
-
-function addCard(title, link) {
+function createCard(title, link) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
 
-  cardElement.querySelector(".card__info-title").textContent = title;
-  cardElement.querySelector(".card__image").src = link;
-  cardElement.querySelector(".card__image").addEventListener("click", function(evt){
-    popupImage.src = link;
-    popupTitle.textContent = title;
-    preview.classList.toggle("popup_disabled");
+  const cardTitle = cardElement.querySelector(".card__info-title");
+  const cardImage = cardElement.querySelector(".card__image");
+
+  cardTitle.textContent = title;
+  cardImage.src = link;
+  cardImage.alt = `A picture of ${title}`;
+  cardImage.addEventListener("click", function(){
+    previewPopupImage.src = link;
+    previewPopupTitle.textContent = title;
+    openPopup(preview);
   });
   cardElement.querySelector(".card__info-button").addEventListener("click", function (evt) {
     evt.target.classList.toggle('card__info-button_active');
@@ -78,42 +90,50 @@ function addCard(title, link) {
   cardElement.querySelector(".card__trash").addEventListener("click", function (evt) {
     evt.target.parentElement.remove();
   });
-  elements.append(cardElement);
-  titleElement.value = '';
-  linkElement.value = '';
+  return cardElement;
 }
 
-initialCards.forEach((card) => {
-  addCard(card.name, card.link);
-});
+function renderCard(item) {
+  elements.prepend(item);
+}
 
-formElementPost.addEventListener("submit", function(evt) {
+function cardFormSubmitHandler(evt) {
   evt.preventDefault();
-  addCard(titleElement.value, linkElement.value);
-  togglePostForm();
+  renderCard(createCard(postTitleElement.value, postLinkElement.value));
+  postTitleElement.value = '';
+  postLinkElement.value = '';
+  closePopup(postPopup);
+}
+
+formElementPost.addEventListener("submit", cardFormSubmitHandler);
+postCloseButton.addEventListener('click', function(){
+  closePopup(postPopup);
+});
+postButton.addEventListener('click', function(){
+  openPopup(postPopup);
 });
 
-postCloseButton.addEventListener('click', togglePostForm);
-postButton.addEventListener('click', togglePostForm);
+initialCards.forEach((card) => {
+  renderCard(createCard(card.name, card.link))
+});
 
-
-//profile edit functions
-function toggleForm() {
-    popup.classList.toggle("popup_disabled");
+//profile functions
+function handleProfileFormSubmit(evt) {
+    evt.preventDefault();
+    profileName.textContent = profileNameInput.value;
+    profileJob.textContent = profileJobInput.value;
+    closePopup(profilePopup);
     if (popup.classList.contains("popup_disabled")) {
     } else {
-        nameInput.value = name.textContent;
-        jobInput.value = job.textContent;
+      profileNameInput.value = profileName.textContent;
+      profileJobInput.value = profileJob.textContent;
     }
 }
 
-function handleProfileFormSubmit(evt) {
-    evt.preventDefault();
-    name.textContent = nameInput.value;
-    job.textContent = jobInput.value;
-    toggleForm();
-}
-
-profileButton.addEventListener('click',toggleForm);
-profileCloseButton.addEventListener('click', toggleForm);
-formElement.addEventListener('submit', handleProfileFormSubmit);
+profileButton.addEventListener('click', function(){
+  openPopup(profilePopup);
+});
+profileCloseButton.addEventListener('click', function(){
+  closePopup(profilePopup);
+});
+profileFormElement.addEventListener('submit', handleProfileFormSubmit);
