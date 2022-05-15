@@ -36,8 +36,8 @@
     max-height: 14px;
 }
 
-.form__info-input:nth-child(2) {
-    margin-bottom: 29.74px;
+.form__info-input:nth-child(4) {
+    margin-top: 29.74px;
 }
 
 .form__info-button {
@@ -60,6 +60,24 @@
 
 .form__info-button:hover {
     opacity: .8;
+}
+
+.form__info_error_visible {
+    color: #FF0000;
+}
+
+.form__info-input_type_error {
+    border-color: #FF0000;
+    margin-bottom: 5px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.form__info-button_disabled {
+    opacity: .2;
 }
 
 @media screen and (max-width: 565px) {

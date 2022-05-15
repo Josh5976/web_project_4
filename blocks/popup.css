@@ -12,6 +12,7 @@
     visibility: visible;
     opacity: 1;
     transition: visibility 0s, opacity .5s linear;
+    cursor: pointer;
 }
 
 .popup_disabled {
@@ -28,6 +29,7 @@
     width: 430px;
     background-color: #FFF;
     border-radius: 10px;
+    cursor: auto;
 }
 
 .popup__content-close {
@@ -71,6 +73,7 @@
     background-color: transparent;
     max-width: 75vw;
     max-height: 75vh;
+    cursor: auto;
 }
 
 @media screen and (max-width: 565px) {

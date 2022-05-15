@@ -31,14 +31,16 @@
             <p class="footer__text">© 2021 Around The U.S.</p>
         </footer>
     </div>
-    <div class="popup popup_disabled">
+    <div class="popup popup_disabled" id="edit_popup">
         <div class="popup__content popup__content_type_form">
             <button class="popup__content-close" type="button"></button>
             <form class="form" name="edit_form" id="edit_form">
                 <fieldset class="form__info">
                     <legend class="form__info-title">Edit profile</legend>
-                    <input class="form__info-input form__info-input_type_name" required="required" type="text" id="name" name="name" value="" placeholder="Name">
-                    <input class="form__info-input form__info-input_type_job" required="required" type="text" id="occupation" name="occupation" value="" placeholder="Occupation">
+                    <input class="form__info-input form__info-input_type_name" required type="text" id="name" name="name" value="" placeholder="Name" minlength="2" maxlength="40">
+                    <span id="name-error"></span>
+                    <input class="form__info-input form__info-input_type_job" required type="text" id="occupation" name="occupation" value="" placeholder="Occupation" minlength="2" maxlength="200">
+                    <span id="occupation-error"></span>
                     <input class="form__info-button" type="submit" value="Save">
                 </fieldset>
             </form>
@@ -50,8 +52,10 @@
             <form class="form" id="form_post" name="edit_form">
                 <fieldset class="form__info">
                     <legend class="form__info-title">New Place</legend>
-                    <input class="form__info-input form__info-input_type_title" required="required" type="text" id="title" value="" placeholder="Title">
-                    <input class="form__info-input form__info-input_type_image" required="required" type="text" id="image" value="" placeholder="Image Link">
+                    <input class="form__info-input form__info-input_type_title" required type="text" id="title" value="" placeholder="Title" minlength="1" maxlength="30">
+                    <span id="title-error"></span>
+                    <input class="form__info-input form__info-input_type_image" required type="url" id="image" value="" placeholder="Image Link">
+                    <span id="image-error"></span>
                     <input class="form__info-button" id="post_submit" type="submit" value="Create">
                 </fieldset>
             </form>
@@ -77,6 +81,7 @@
         </article>
     </template>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
 </body>
 
 </html>

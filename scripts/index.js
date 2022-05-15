@@ -1,3 +1,20 @@
+const pagePopups = document.querySelectorAll(".popup");
+pagePopups.forEach((item) => 
+  item.addEventListener('click', function(evt){
+    if(evt.target.classList.value.includes("popup")){
+      closePopup(evt.target);
+    };
+  }));
+
+function escClosePopup(evt){
+  const activePopup = document.querySelector(".popup_active");
+  if (evt.key === "Escape") {
+    closePopup(activePopup);
+  }
+};
+
+
+
 //form elements
 const profileFormElement = document.querySelector(".form");
 const formButton = profileFormElement.querySelector(".form__info-button");
@@ -11,7 +28,7 @@ const profileJob = document.querySelector(".profile__info-subtitle");
 
 //popup elements
 const profileCloseButton = document.querySelector(".popup__content-close");
-const profilePopup = document.querySelector(".popup");
+const profilePopup = document.querySelector("#edit_popup");
 const postPopup = document.querySelector("#popup_post");
 
 //post elements
@@ -58,10 +75,20 @@ const closePreviewButton = preview.querySelector(".popup__content-close")
 //popup functions
 function openPopup(elem) {
   elem.classList.remove("popup_disabled");
+  elem.classList.add("popup_enabled");
+  document.addEventListener('keydown', function(evt){
+    escClosePopup(evt, elem);
+  });
+}
+function escClosePopup(evt, elem){
+  if (evt.key === "Escape"){
+    closePopup(elem);
+  }
 }
 
 function closePopup(elem) {
   elem.classList.add("popup_disabled");
+  elem.classList.remove("popup_enabled")
 }
 
 //preview functions
