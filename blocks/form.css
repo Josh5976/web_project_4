@@ -78,6 +78,11 @@
 
 .form__info-button_disabled {
     opacity: .2;
+    cursor: auto;
+}
+
+.form__info-button_disabled:hover {
+    opacity: .2;
 }
 
 @media screen and (max-width: 565px) {
