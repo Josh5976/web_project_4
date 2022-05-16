@@ -1,19 +1,3 @@
-const pagePopups = document.querySelectorAll(".popup");
-pagePopups.forEach((item) => 
-  item.addEventListener('click', function(evt){
-    if(evt.target.classList.value.includes("popup")){
-      closePopup(evt.target);
-    };
-  }));
-
-function escClosePopup(evt){
-  const activePopup = document.querySelector(".popup_active");
-  if (evt.key === "Escape") {
-    closePopup(activePopup);
-  }
-};
-
-
 
 //form elements
 const profileFormElement = document.querySelector(".form");
@@ -39,6 +23,7 @@ const cardTemplate = document.querySelector("#card-template").content;
 const formElementPost = document.querySelector("#form_post");
 const postTitleElement = document.querySelector(".form__info-input_type_title");
 const postLinkElement = document.querySelector(".form__info-input_type_image");
+const postSubmitButton = document.querySelector("#post_submit");
 const initialCards = [
     {
       name: "Yosemite Valley",
@@ -73,22 +58,29 @@ const previewPopupImage = preview.querySelector(".popup__image");
 const closePreviewButton = preview.querySelector(".popup__content-close")
 
 //popup functions
-function openPopup(elem) {
-  elem.classList.remove("popup_disabled");
-  elem.classList.add("popup_enabled");
-  document.addEventListener('keydown', function(evt){
-    escClosePopup(evt, elem);
-  });
+const closePopupOnRemoteClick = (evt) => {
+  if(evt.target === evt.currentTarget){
+    closePopup(evt.target);
+  };
 }
-function escClosePopup(evt, elem){
-  if (evt.key === "Escape"){
-    closePopup(elem);
+
+const closePopupEsc = (evt) => {
+  if (evt.key === "Escape") {
+    const activePopup = document.querySelector(".popup_enabled");
+    closePopup(activePopup);
   }
+};
+
+function openPopup(elem) {
+  elem.classList.add("popup_enabled");
+  document.addEventListener('keydown', closePopupEsc);
+  elem.addEventListener('mousedown', closePopupOnRemoteClick);
 }
 
 function closePopup(elem) {
-  elem.classList.add("popup_disabled");
-  elem.classList.remove("popup_enabled")
+  elem.classList.remove("popup_enabled");
+  document.removeEventListener('keydown', closePopupEsc);
+  elem.removeEventListener('mousedown', closePopupOnRemoteClick);
 }
 
 //preview functions
@@ -128,8 +120,8 @@ function renderCard(item) {
 function cardFormSubmitHandler(evt) {
   evt.preventDefault();
   renderCard(createCard(postTitleElement.value, postLinkElement.value));
-  postTitleElement.value = '';
-  postLinkElement.value = '';
+  formElementPost.reset();
+  toggleButton([postTitleElement, postLinkElement], postSubmitButton, validationSettings);
   closePopup(postPopup);
 }
 

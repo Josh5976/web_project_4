@@ -1,15 +1,15 @@
 // displays the input error
 const showInputError = (input, formElement, settings) => {
-    const errorSpan = formElement.querySelector('#' + input.id + '-error');
-    errorSpan.textContent = input.validationMessage;
-    errorSpan.classList.add(settings.errorClass);
+    const errorElement = formElement.querySelector('#' + input.id + '-error');
+    errorElement.textContent = input.validationMessage;
+    errorElement.classList.add(settings.errorClass);
     input.classList.add(settings.inputErrorClass);
 }
 // hides the input error
 const hideInputError = (input, formElement, settings) => {
-    const errorSpan = formElement.querySelector('#' + input.id + '-error');
-    errorSpan.textContent = '';
-    errorSpan.classList.remove(settings.errorClass);
+    const errorElement = formElement.querySelector('#' + input.id + '-error');
+    errorElement.textContent = '';
+    errorElement.classList.remove(settings.errorClass);
     input.classList.remove(settings.inputErrorClass);
     
 }
@@ -22,13 +22,14 @@ const checkInputValidity = (formElement, input, settings) => {
     }
 }
 // checks to see if both inputs are valid to turn on button
-const hasValidInputs = (inputList) => {
+const checkIfAllInputsValid = (inputList) => {
     return inputList.every(input => input.validity.valid);
 }
 
 const toggleButton = (inputList, button, settings) => {
+    console.log(inputList);
     // check if all inputs are valid
-    if(hasValidInputs(inputList)){
+    if(checkIfAllInputsValid(inputList)){
         button.disabled = false;
         button.classList.remove(settings.inactiveButtonClass);
     } else {
@@ -64,11 +65,12 @@ const enableValidation = (settings) => {
     
 }
 
-enableValidation({
-    formSelector: ".form",
-    inputSelector: ".form__info-input",
-    submitButtonSelector: ".form__info-button",
-    inactiveButtonClass: "form__info-button_disabled",
-    inputErrorClass: "form__info-input_type_error",
-    errorClass: "form__info_error_visible"
-  }); 
+const validationSettings = {formSelector: ".form",
+inputSelector: ".form__info-input",
+submitButtonSelector: ".form__info-button",
+inactiveButtonClass: "form__info-button_disabled",
+inputErrorClass: "form__info-input_type_error",
+errorClass: "form__info_error_visible"
+}
+
+enableValidation(validationSettings); 
