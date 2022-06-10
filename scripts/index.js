@@ -1,9 +1,13 @@
+import FormValidator from "./FormValidator.js";
+import Card from "./card.js";
+import {closePopupEsc, closePopupOnRemoteClick, openPopup, closePopup} from "./utils.js";
+
 
 //form elements
-const profileFormElement = document.querySelector(".form");
-const formButton = profileFormElement.querySelector(".form__info-button");
-const profileNameInput = profileFormElement.querySelector(".form__info-input_type_name");
-const profileJobInput = profileFormElement.querySelector(".form__info-input_type_job");
+const editFormElement = document.querySelector(".form");
+const formButton = editFormElement.querySelector(".form__info-button");
+const profileNameInput = document.querySelector(".form__info-input_type_name");
+const profileJobInput = document.querySelector(".form__info-input_type_job");
 
 //profile elements
 const profileButton = document.querySelector(".profile__info-button");
@@ -20,7 +24,7 @@ const postButton = document.querySelector(".profile__button");
 const postCloseButton = document.querySelector("#post_close");
 const elements = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#card-template").content;
-const formElementPost = document.querySelector("#form_post");
+const postFormElement = document.querySelector("#form_post");
 const postTitleElement = document.querySelector(".form__info-input_type_title");
 const postLinkElement = document.querySelector(".form__info-input_type_image");
 const postSubmitButton = document.querySelector("#post_submit");
@@ -53,91 +57,45 @@ const initialCards = [
 
 //preview post elements
 const preview = document.querySelector(".popup_type_preview");
-const previewPopupTitle = preview.querySelector(".popup__title");
-const previewPopupImage = preview.querySelector(".popup__image");
 const closePreviewButton = preview.querySelector(".popup__content-close")
 
-//popup functions
-const closePopupOnRemoteClick = (evt) => {
-  if(evt.target === evt.currentTarget){
-    closePopup(evt.target);
-  };
-}
+// SET EVENT HANDLERS //
+closePreviewButton.addEventListener("click", ()=> closePopup(preview));
 
-const closePopupEsc = (evt) => {
-  if (evt.key === "Escape") {
-    const activePopup = document.querySelector(".popup_enabled");
-    closePopup(activePopup);
-  }
-};
+postFormElement.addEventListener("submit", cardFormSubmitHandler);
 
-function openPopup(elem) {
-  elem.classList.add("popup_enabled");
-  document.addEventListener('keydown', closePopupEsc);
-  elem.addEventListener('mousedown', closePopupOnRemoteClick);
-}
+postCloseButton.addEventListener('click', ()=> closePopup(postPopup));
 
-function closePopup(elem) {
-  elem.classList.remove("popup_enabled");
-  document.removeEventListener('keydown', closePopupEsc);
-  elem.removeEventListener('mousedown', closePopupOnRemoteClick);
-}
+postButton.addEventListener('click', ()=> openPopup(postPopup));
 
-//preview functions
-closePreviewButton.addEventListener("click", function(){
-  closePopup(preview);
+profileButton.addEventListener('click', ()=> {
+  fillProfilePopup();
+  openPopup(profilePopup);
 });
 
-// post edit functions
-function createCard(title, link) {
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+profileCloseButton.addEventListener('click', ()=> closePopup(profilePopup));
 
-  const cardTitle = cardElement.querySelector(".card__info-title");
-  const cardImage = cardElement.querySelector(".card__image");
+editFormElement.addEventListener('submit', handleProfileFormSubmit);
 
-  cardTitle.textContent = title;
-  cardImage.src = link;
-  cardImage.alt = `A picture of ${title}`;
-  cardImage.addEventListener("click", function(){
-    previewPopupImage.src = link;
-    previewPopupImage.alt = `The full picture of ${title}`;
-    previewPopupTitle.textContent = title;
-    openPopup(preview);
-  });
-  cardElement.querySelector(".card__info-button").addEventListener("click", function (evt) {
-    evt.target.classList.toggle('card__info-button_active');
-  });
-  cardElement.querySelector(".card__trash").addEventListener("click", function (evt) {
-    evt.target.parentElement.remove();
-  });
-  return cardElement;
-}
-
-function renderCard(item) {
-  elements.prepend(item);
-}
-
+// CARD FUNCTIONS
 function cardFormSubmitHandler(evt) {
   evt.preventDefault();
-  renderCard(createCard(postTitleElement.value, postLinkElement.value));
-  formElementPost.reset();
-  toggleButton([postTitleElement, postLinkElement], postSubmitButton, validationSettings);
+  renderCard({name: postTitleElement.value, link: postLinkElement.value}, elements);
+  postFormElement.reset();
   closePopup(postPopup);
+  postFormValidator._toggleButton();
 }
 
-formElementPost.addEventListener("submit", cardFormSubmitHandler);
-postCloseButton.addEventListener('click', function(){
-  closePopup(postPopup);
-});
-postButton.addEventListener('click', function(){
-  openPopup(postPopup);
-});
+const renderCard = (data, wrap) => {
+  elements.prepend(new Card(data, '#card-template').generateCard());
+}
+
 
 initialCards.forEach((card) => {
-  renderCard(createCard(card.name, card.link))
+  renderCard(card, elements)
 });
 
-//profile functions
+//PROFILE FUNCTIONS
 function fillProfilePopup(){
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
@@ -150,11 +108,22 @@ function handleProfileFormSubmit(evt) {
   closePopup(profilePopup);
 }
 
-profileButton.addEventListener('click', function(){
-  fillProfilePopup();
-  openPopup(profilePopup);
-});
-profileCloseButton.addEventListener('click', function(){
-  closePopup(profilePopup);
-});
-profileFormElement.addEventListener('submit', handleProfileFormSubmit);
+
+
+// VALIDATION //
+
+const validationSettings = {
+  formSelector: ".form",
+  inputSelector: ".form__info-input",
+  submitButtonSelector: ".form__info-button",
+  inactiveButtonClass: "form__info-button_disabled",
+  inputErrorClass: "form__info-input_type_error",
+  errorClass: "form__info_error_visible"
+};
+
+const editFormValidator = new FormValidator(validationSettings, editFormElement);
+const postFormValidator = new FormValidator(validationSettings, postFormElement);
+
+editFormValidator.enableValidation();
+postFormValidator.enableValidation();
+
