@@ -1,5 +1,6 @@
 
 const closePopupOnRemoteClick = (evt) => {
+    console.log(evt.target);
     if(evt.target === evt.currentTarget){
       closePopup(evt.target);
     };

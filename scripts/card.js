@@ -13,14 +13,23 @@ const handleEsc = (evt) => {
     }
 }
 
+const closePopupOnRemoteClick = (evt) => {
+    console.log(evt.target);
+    if(evt.target === evt.currentTarget){
+      closePopup(evt.target);
+    };
+  }
+
 const openPopup = (popup) => {
     popup.classList.add("popup_enabled");
     document.addEventListener('keydown', handleEsc);
+    popup.addEventListener('mousedown', closePopupOnRemoteClick);
 }
 
 const closePopup = (popup) => {
     popup.classList.remove('popup_enabled');
     document.removeEventListener('keydown', handleEsc);
+    popup.removeEventListener('mousedown', closePopupOnRemoteClick);
 }
 
 
