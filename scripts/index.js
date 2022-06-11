@@ -23,7 +23,6 @@ const postPopup = document.querySelector("#popup_post");
 const postButton = document.querySelector(".profile__button");
 const postCloseButton = document.querySelector("#post_close");
 const elements = document.querySelector(".elements");
-const cardTemplate = document.querySelector("#card-template").content;
 const postFormElement = document.querySelector("#form_post");
 const postTitleElement = document.querySelector(".form__info-input_type_title");
 const postLinkElement = document.querySelector(".form__info-input_type_image");
@@ -83,7 +82,7 @@ function cardFormSubmitHandler(evt) {
   renderCard({name: postTitleElement.value, link: postLinkElement.value}, elements);
   postFormElement.reset();
   closePopup(postPopup);
-  postFormValidator._toggleButton();
+  postFormValidator.toggleButton();
 }
 
 const renderCard = (data, wrap) => {

@@ -1,37 +1,9 @@
+import {closePopupEsc, closePopupOnRemoteClick, openPopup, closePopup} from './utils.js';
+
 const preview = document.querySelector(".popup_type_preview");
 const previewPopupTitle = preview.querySelector(".popup__title");
 const previewPopupImage = preview.querySelector(".popup__image");
 const ESC_KEYCODE = 27;
-
-const handleEsc = (evt) => {
-    evt.preventDefault();
-
-    const activePopup = document.querySelector('.popup_enabled');
-
-    if (evt.which === ESC_KEYCODE) {
-        closePopup(activePopup);
-    }
-}
-
-const closePopupOnRemoteClick = (evt) => {
-    console.log(evt.target);
-    if(evt.target === evt.currentTarget){
-      closePopup(evt.target);
-    };
-  }
-
-const openPopup = (popup) => {
-    popup.classList.add("popup_enabled");
-    document.addEventListener('keydown', handleEsc);
-    popup.addEventListener('mousedown', closePopupOnRemoteClick);
-}
-
-const closePopup = (popup) => {
-    popup.classList.remove('popup_enabled');
-    document.removeEventListener('keydown', handleEsc);
-    popup.removeEventListener('mousedown', closePopupOnRemoteClick);
-}
-
 
 class Card {
     constructor(data, cardSelector) {
@@ -51,19 +23,20 @@ class Card {
     }
 
     _handleDeleteIcon() {
-        this.parentElement.remove();
+        this._template.remove();
+        this._template = null;
     }
 
     _handlePreviewImage() {
         previewPopupImage.src = this._link;
-        console.log(this);
+        previewPopupImage.alt = `This is a picture of ${this._name}`;
         previewPopupTitle.textContent = this._name;
         openPopup(preview);
     }
 
     _setEventListeners() {
         this._likeButton.addEventListener("click", this._handleLikeIcon);
-        this._deleteButton.addEventListener("click", this._handleDeleteIcon);
+        this._deleteButton.addEventListener("click", this._handleDeleteIcon.bind(this));
         this._cardImage.addEventListener("click", ()=> this._handlePreviewImage(this));
     }
 
@@ -72,11 +45,10 @@ class Card {
         this._likeButton = this._template.querySelector(".card__info-button");
         this._deleteButton = this._template.querySelector(".card__trash");
         this._cardImage = this._template.querySelector(".card__image");
-        this._cardTitle = this._template.querySelector(".card__info-title");
 
+        this._template.querySelector(".card__info-title").textContent = this._name;
         this._cardImage.src = this._link;
-        this._cardTitle.textContent = this._name;
-
+        this._cardImage.alt = `A picture of ${this._name}`;
         this._setEventListeners();
 
         return this._template;
