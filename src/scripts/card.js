@@ -1,4 +1,3 @@
-import {closePopupEsc, closePopupOnRemoteClick, openPopup, closePopup} from './utils.js';
 
 const preview = document.querySelector(".popup_type_preview");
 const previewPopupTitle = preview.querySelector(".popup__title");
@@ -6,7 +5,8 @@ const previewPopupImage = preview.querySelector(".popup__image");
 const ESC_KEYCODE = 27;
 
 class Card {
-    constructor(data, cardSelector) {
+    constructor(data, cardSelector, handleCardClick) {
+        this.handleCardClick = handleCardClick;
         this._name = data.name;
         this._link = data.link;
 
@@ -27,17 +27,10 @@ class Card {
         this._template = null;
     }
 
-    _handlePreviewImage() {
-        previewPopupImage.src = this._link;
-        previewPopupImage.alt = `This is a picture of ${this._name}`;
-        previewPopupTitle.textContent = this._name;
-        openPopup(preview);
-    }
-
     _setEventListeners() {
         this._likeButton.addEventListener("click", this._handleLikeIcon);
         this._deleteButton.addEventListener("click", this._handleDeleteIcon.bind(this));
-        this._cardImage.addEventListener("click", ()=> this._handlePreviewImage(this));
+        this._cardImage.addEventListener("click", this.handleCardClick);
     }
 
     generateCard() {

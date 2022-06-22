@@ -5,17 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="content" content="HTML, CSS, JavaScript">
-    <link rel="stylesheet" href="./pages/index.css">
     <title>Around the US</title>
 </head>
 <body>
     <div class="page">
         <header class="header">
-            <img src="./images/header_vector.svg" class="header__image" alt="Around the US">
+            <img src="<%=require('./images/header_vector.svg')%>" class="header__image" alt="Around the US">
         </header>
         <main class="page__content">
             <section class="profile">
-                <img src="./images/profile_image.jpg" class="profile__image" alt="profile image">
+                <img src="<%=require('./images/profile_image.jpg')%>" class="profile__image" alt="profile image">
                 <div class="profile__info">
                     <h1 class="profile__info-title">Jacques Cousteau</h1>
                     <button class="profile__info-button" type="button"></button>
@@ -52,9 +51,9 @@
             <form class="form" id="form_post" name="edit_form">
                 <fieldset class="form__info">
                     <legend class="form__info-title">New Place</legend>
-                    <input class="form__info-input form__info-input_type_title" required type="text" id="title" value="" placeholder="Title" minlength="1" maxlength="30">
+                    <input class="form__info-input form__info-input_type_title" required type="text" id="title" name="name" value="" placeholder="Title" minlength="1" maxlength="30">
                     <span id="title-error"></span>
-                    <input class="form__info-input form__info-input_type_image" required type="url" id="image" value="" placeholder="Image Link">
+                    <input class="form__info-input form__info-input_type_image" required type="url" id="image" name="link" value="" placeholder="Image Link">
                     <span id="image-error"></span>
                     <input class="form__info-button" id="post_submit" type="submit" value="Create">
                 </fieldset>
@@ -80,7 +79,6 @@
             </div>
         </article>
     </template>
-    <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
