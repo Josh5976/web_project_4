@@ -1,9 +1,3 @@
-
-const preview = document.querySelector(".popup_type_preview");
-const previewPopupTitle = preview.querySelector(".popup__title");
-const previewPopupImage = preview.querySelector(".popup__image");
-const ESC_KEYCODE = 27;
-
 class Card {
     constructor(data, cardSelector, handleCardClick) {
         this.handleCardClick = handleCardClick;
@@ -18,8 +12,8 @@ class Card {
         .content.querySelector(".card").cloneNode(true);
     }
 
-    _handleLikeIcon() {
-        this.classList.toggle("card__info-button_active");
+    _handleLikeIcon(evt) {
+        evt.target.classList.toggle("card__info-button_active");
     }
 
     _handleDeleteIcon() {
