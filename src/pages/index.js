@@ -2,7 +2,7 @@ import "./index.css";
 import { 
   editFormElement, editButton, profileName,
   profileJob, editPopup, postPopup, postButton, 
-  cardListSelector, postFormElement, preview, initialCards 
+  cardListSelector, postFormElement, preview, initialCards, validationSettings 
 } from '../utils/constants.js';
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
@@ -27,6 +27,7 @@ const postFormPopup = new PopupWithForm(postPopup, {handleFormSubmit: (data) => 
 }});
 
 const previewImagePopup = new PopupWithImage(preview);
+previewImagePopup.setEventListeners();
 
 // SET EVENT HANDLERS //
 
@@ -54,7 +55,6 @@ const createCard = (data) => {
 
 const handleCardClick = (item) => {
   previewImagePopup.open(item.name, item.link);
-  previewImagePopup.setEventListeners();
 }
 
 const placeCards = new Section({
@@ -71,15 +71,6 @@ placeCards.renderItems();
 
 
 // VALIDATION //
-
-const validationSettings = {
-  formSelector: ".form",
-  inputSelector: ".form__info-input",
-  submitButtonSelector: ".form__info-button",
-  inactiveButtonClass: "form__info-button_disabled",
-  inputErrorClass: "form__info-input_type_error",
-  errorClass: "form__info_error_visible"
-};
 
 const editFormValidator = new FormValidator(validationSettings, editFormElement);
 const postFormValidator = new FormValidator(validationSettings, postFormElement);

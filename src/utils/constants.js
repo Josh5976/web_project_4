@@ -45,9 +45,18 @@ const initialCards = [
     }
   ];
 
+const validationSettings = {
+  formSelector: ".form",
+  inputSelector: ".form__info-input",
+  submitButtonSelector: ".form__info-button",
+  inactiveButtonClass: "form__info-button_disabled",
+  inputErrorClass: "form__info-input_type_error",
+  errorClass: "form__info_error_visible"
+};
+
 
   export { 
     editFormElement, editButton, profileName,
     profileJob, editPopup, postPopup, postButton, 
-    cardListSelector, postFormElement, preview, initialCards 
+    cardListSelector, postFormElement, preview, initialCards, validationSettings
 };
