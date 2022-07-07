@@ -15,7 +15,7 @@
         <main class="page__content">
             <section class="profile">
                 <div class="profile__avatar profile__avatar_container">
-                    <img src="" class="profile__avatar-image" alt="profile image">
+                    <img src=" " class="profile__avatar-image" alt="profile image">
                     <div class="profile__avatar-overlay">
                         <img src="<%=require('./images/edit_profile_image.svg')%>" class="profile__avatar-overlay-image">
                     </div>
@@ -76,7 +76,7 @@
 
     <div class="popup" id="delete_post">
         <div class="popup__content popup__content_type_form">
-            <button class="popup__content-close" type="button" id="post_close"></button>
+            <button class="popup__content-close" type="button" id="delete_button"></button>
             <div class="form">
                 <h2 class="form__info-title form__info-title_type_delete">Are you sure?</h2>
                 <input class="form__info-button form__info-button_type_delete" type="button" value="Yes">
@@ -86,7 +86,7 @@
 
     <div class="popup" id="avatar_popup">
         <div class="popup__content popup__content_type_form">
-            <button class="popup__content-close" type="button" id="post_close"></button>
+            <button class="popup__content-close" type="button" id="avatar_button"></button>
             <form class="form" id="avatar_form" name="avatar_form">
                 <fieldset class="form__info">
                     <legend class="form__info-title">Change profile picture</legend>
