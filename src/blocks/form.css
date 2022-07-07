@@ -86,6 +86,14 @@
     opacity: .2;
 }
 
+.form__info-title_type_delete {
+    margin-bottom: 38px;
+}
+
+.form__info-button_type_delete {
+    margin-top: 0px;
+}
+
 @media screen and (max-width: 565px) {
     .form {
         max-width: 238px;
@@ -106,5 +114,11 @@
     }
     .form__info-input:first-child {
         margin-bottom: 30px;
+    }
+    .form__info-button_type_delete {
+        margin-top: 0px;
+    }
+    .form__info-title_type_delete {
+        margin-bottom: 38px;
     }
 }

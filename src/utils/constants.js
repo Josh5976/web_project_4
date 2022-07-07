@@ -5,10 +5,17 @@ const editFormElement = document.querySelector(".form");
 const editButton = document.querySelector(".profile__info-button");
 const profileName = ".profile__info-title";
 const profileJob = ".profile__info-subtitle";
+const profilePicture = ".profile__avatar-image";
+const editAvatarButton = document.querySelector(".profile__avatar-overlay-image");
 
 //popup elements
 const editPopup = "#edit_popup";
 const postPopup = "#popup_post";
+const deletePopup = "#delete_post";
+
+//avatar elements
+const avatarPopup = "#avatar_popup";
+const avatarForm = document.querySelector("#avatar_form");
 
 //post elements
 const postButton = document.querySelector(".profile__button");
@@ -58,5 +65,6 @@ const validationSettings = {
   export { 
     editFormElement, editButton, profileName,
     profileJob, editPopup, postPopup, postButton, 
-    cardListSelector, postFormElement, preview, initialCards, validationSettings
+    cardListSelector, postFormElement, preview, initialCards, validationSettings,
+    profilePicture, deletePopup, avatarPopup, editAvatarButton, avatarForm
 };

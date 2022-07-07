@@ -14,11 +14,16 @@
         </header>
         <main class="page__content">
             <section class="profile">
-                <img src="<%=require('./images/profile_image.jpg')%>" class="profile__image" alt="profile image">
+                <div class="profile__avatar profile__avatar_container">
+                    <img src="" class="profile__avatar-image" alt="profile image">
+                    <div class="profile__avatar-overlay">
+                        <img src="<%=require('./images/edit_profile_image.svg')%>" class="profile__avatar-overlay-image">
+                    </div>
+                </div>
                 <div class="profile__info">
-                    <h1 class="profile__info-title">Jacques Cousteau</h1>
+                    <h1 class="profile__info-title"></h1>
                     <button class="profile__info-button" type="button"></button>
-                    <p class="profile__info-subtitle">Explorer</p>
+                    <p class="profile__info-subtitle"></p>
                 </div>
                 <button class="profile__button" type="button"></button>
             </section>
@@ -69,13 +74,40 @@
         </div>
     </div>
 
+    <div class="popup" id="delete_post">
+        <div class="popup__content popup__content_type_form">
+            <button class="popup__content-close" type="button" id="post_close"></button>
+            <div class="form">
+                <h2 class="form__info-title form__info-title_type_delete">Are you sure?</h2>
+                <input class="form__info-button form__info-button_type_delete" type="button" value="Yes">
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="avatar_popup">
+        <div class="popup__content popup__content_type_form">
+            <button class="popup__content-close" type="button" id="post_close"></button>
+            <form class="form" id="avatar_form" name="avatar_form">
+                <fieldset class="form__info">
+                    <legend class="form__info-title">Change profile picture</legend>
+                    <input class="form__info-input" required type="url" id="avatar" name="avatar" value="" placeholder="Enter image url">
+                    <span id="avatar-error"></span>
+                    <input class="form__info-button" type="submit" value="Save">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
     <template id="card-template">
         <article class="card">
             <button class="card__trash" type="button"></button>
             <img src=" " class="card__image" alt="some image">
             <div class="card__info">
                 <h2 class="card__info-title"></h2>
-                <button class="card__info-button" type="button"></button>
+                <div class="card__info-container">
+                    <button class="card__info-button" type="button"></button>
+                    <h3 class="card__info-likes"></h3>
+                </div>
             </div>
         </article>
     </template>
