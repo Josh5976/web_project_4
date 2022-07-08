@@ -22,10 +22,6 @@ class Card {
         .content.querySelector(".card").cloneNode(true);
     }
 
-    _handleLikeIcon(evt) {
-        evt.target.classList.toggle("card__info-button_active");
-    }
-
     _isLiked() {
         return this._likeButton.classList.contains("card__info-button_active");
         
