@@ -33,7 +33,6 @@ class Card {
 
     setLikes() {
         if(!this._isLiked()) {
-            
             this._api.addLike(this._id)
             .then((result) => {
                 this._likeButton.classList.add('card__info-button_active');
@@ -60,7 +59,8 @@ class Card {
         this._api.deleteCard(this._id)
         .then(()=> {
             this._template.remove();
-            this._template = null
+            this._template = null;
+            this._deleteCardPopup.close();
         })
         .catch((err) => {
             console.log(err);
