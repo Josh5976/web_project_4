@@ -60,7 +60,11 @@ class Card {
         this._api.deleteCard(this._id)
         .then(()=> {
             this._template.remove();
-            this._template = null});
+            this._template = null
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }
 
     
