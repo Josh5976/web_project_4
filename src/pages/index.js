@@ -58,10 +58,14 @@ const api = new Api({
   }
 });
 
-api.getInitialCards()
-  .then((result) => {
+Promise.all([api.getUser(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo({name: userData.name, about: userData.about});
+    userInfo.setAvatar({avatar: userData.avatar});
+    userId = userData._id;
+
     placeCards = new Section({
-      items: result,
+      items: cards,
       renderer: (item) => {
         const cardElement = createCard(returnCard(item), item.owner._id,userId, item._id);
         placeCards.addItem(cardElement);
@@ -70,22 +74,22 @@ api.getInitialCards()
     );
     placeCards.renderItems();
   })
-  .catch((err) => console.log("This is an error", err));
-
-api.getUser()
-  .then((result) => {
-    userInfo.setUserInfo({name: result.name, about: result.about});
-    userInfo.setAvatar({avatar: result.avatar});
-    userId = result._id;
+  .catch((err) => {
+    console.log(err);
   })
-  .catch((err => {
-    console.log(err)
-  }))
+
 
 // POPUP FUNCTIONS //
 const changeAvatarPopup = new PopupWithForm(avatarPopup, {handleFormSubmit: (data) => {
-  api.changeAvatar({avatar: data.avatar});
-  userInfo.setAvatar({avatar: data.avatar});
+  api.changeAvatar({avatar: data.avatar})
+    .then((data) => {
+      userInfo.setAvatar({avatar: data.avatar});
+      changeAvatarPopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  
 }})
 changeAvatarPopup.setEventListeners();
 
@@ -93,8 +97,14 @@ const deleteCardPopupConfirm = new PopupWithDeleteConfirm(deletePopup, handleDel
 deleteCardPopupConfirm.setEventListeners();
 
 const editFormPopup = new PopupWithForm(editPopup, {handleFormSubmit: (data) => {
-  api.changeUser({userName: data.name, userOccupation: data.occupation});
-  userInfo.setUserInfo({name: data.name, about: data.occupation});
+  api.changeUser({userName: data.name, userOccupation: data.occupation})
+    .then(() => {
+      userInfo.setUserInfo({name: data.name, about: data.occupation});
+      editFormPopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    }) 
 }})
 
 const postFormPopup = new PopupWithForm(postPopup, {handleFormSubmit: (data) => {
@@ -102,7 +112,10 @@ const postFormPopup = new PopupWithForm(postPopup, {handleFormSubmit: (data) => 
   .then((result) => {
     const cardElement = createCard(returnCard(result), userId, userId);
     placeCards.addItem(cardElement);
-    
+    postFormPopup.close();
+  })
+  .catch((err) => {
+    console.log(err);
   })
 }});
 

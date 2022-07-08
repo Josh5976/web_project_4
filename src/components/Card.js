@@ -33,16 +33,23 @@ class Card {
 
     setLikes() {
         if(!this._isLiked()) {
-            this._likeButton.classList.add('card__info-button_active');
+            
             this._api.addLike(this._id)
             .then((result) => {
+                this._likeButton.classList.add('card__info-button_active');
                 this._likesElement.textContent = result.likes.length;
             })
+            .catch((err) => {
+                console.log(err);
+            })
         } else {
-            this._likeButton.classList.remove('card__info-button_active');
             this._api.deleteLike(this._id)
             .then((result) => {
+                this._likeButton.classList.remove('card__info-button_active');
                 this._likesElement.textContent = result.likes.length;
+            })
+            .catch((err) => {
+                console.log(err);
             })
         }
     } 
@@ -50,9 +57,10 @@ class Card {
 
     
     handleDeleteIcon() {
-        this._api.deleteCard(this._id);
-        this._template.remove();
-        this._template = null;
+        this._api.deleteCard(this._id)
+        .then(()=> {
+            this._template.remove();
+            this._template = null});
     }
 
     

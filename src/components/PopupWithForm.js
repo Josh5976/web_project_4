@@ -25,9 +25,7 @@ export default class PopupWithForm extends Popup {
             evt.preventDefault();
             this._submitButton.value = "Saving...";
             this._handleFormSubmit(this._getInputValues());
-
-            this.close();
-            //submitButton.value = submitButtonText;
+            
         });
     }
 

@@ -43,10 +43,6 @@ export class Api {
         return Promise.reject(`Error: ${res.status}`);
     }
 
-    _handleErrorResponse(err) {
-        console.log(`Error ${err}`)
-    }
-
     getInitialCards() {
         return fetch(`${this._url}/cards`, {
             headers: this._headers,
@@ -62,7 +58,6 @@ export class Api {
             body: JSON.stringify(data),
         })
         .then(this._handleResponse)
-        .catch(this._handleErrorResponse);
     }
 
     deleteCard(id) {

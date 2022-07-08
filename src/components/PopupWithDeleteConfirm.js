@@ -15,8 +15,8 @@ export default class PopupWithDeleteConfirm extends Popup {
     setEventListeners() {
         super.setEventListeners();
         this._button.addEventListener("click", () => {
-            this._handleButtonClick(this._card);
-            this.close();
+            this._handleButtonClick(this._card)
+            .then(() => {this.close()})
         })
     }
 }
